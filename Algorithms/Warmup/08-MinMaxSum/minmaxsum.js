@@ -1,11 +1,10 @@
 module.exports = function minmaxsum(values) {
   const initial = values.reduce((sum, value) => sum += value, 0);
-  let max = Number.MIN_SAFE_INTEGER;
-  let min = Number.MAX_SAFE_INTEGER;
-  values.forEach(value => {
-    const current = initial - value;
-    max = current > max ? current : max;
-    min = current < min ? current : min;
-  });
-  console.log(min, max);
+  const result = values.reduce((res, val) => {
+    return {
+      max: initial - val > res.max ? initial - val : res.max,
+      min: initial - val < res.min ? initial - val : res.min
+    };
+  }, { min: Number.MAX_SAFE_INTEGER, max: Number.MIN_SAFE_INTEGER });
+  console.log(result.min, result.max);
 };
